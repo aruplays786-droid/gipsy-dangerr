@@ -1,19 +1,26 @@
 import React from "react";
-import confetti from "canvas-confetti"; // install via npm i canvas-confetti
+import confetti from "canvas-confetti"; // make sure canvas-confetti is installed
 
 export default function GiftReveal() {
+  // Set your Instagram username here
+  const instagramUsername = "arham.games";
+    
+  // Use the official deep-link format for DMs
+  // This is the correct way to try and open the Instagram mobile app
+  const instagramDmLink = `https://ig.me/m/${instagramUsername}`;
+
   const handleClick = () => {
-    // Trigger confetti
+    // 1. Trigger confetti
     confetti({
       particleCount: 100,
       spread: 70,
       origin: { y: 0.6 },
     });
 
-    // Redirect to Instagram DM after a short delay
+    // 2. Redirect to Instagram DM after a short delay
     setTimeout(() => {
       window.open(
-        "https://www.instagram.com/direct/new/?username=arham.games",
+        instagramDmLink, 
         "_blank"
       );
     }, 800); // delay so confetti shows before redirect
