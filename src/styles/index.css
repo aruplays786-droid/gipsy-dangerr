@@ -1,0 +1,107 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ---------------- Base Layout ---------------- */
+html, body, #root { height: 100%; }
+
+/* 🌈 Soft gradient background (animated below) */
+body {
+  background: linear-gradient(120deg, #fce1ff, #e4e9ff, #fff0f6);
+  background-size: 400% 400%;
+  animation: gradientShift 12s ease infinite;
+  overflow-x: hidden;
+  transition: background 1s ease-in-out;
+}
+
+/* smooth gradient motion */
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* ---------------- Reusable Helpers ---------------- */
+.card-back { @apply bg-white/80 rounded-2xl shadow-md p-4 flex items-center justify-center; }
+
+.card { perspective: 1000px; }
+.card-inner { transition: transform 0.6s; transform-style: preserve-3d; position: relative; }
+.card.flipped .card-inner { transform: rotateY(180deg); }
+.card-face { position: absolute; width: 100%; height: 100%; backface-visibility: hidden; border-radius: 12px; }
+.card-back-face { @apply bg-white/90 flex items-center justify-center; }
+.card-front-face { transform: rotateY(180deg); }
+
+.confetti { position: absolute; inset: 0; pointer-events: none; }
+
+.audio-control { @apply fixed bottom-4 right-4 bg-white/60 backdrop-blur-md p-2 rounded-full shadow-lg; }
+
+.section { @apply min-h-screen flex items-center justify-center p-8; }
+
+.grid-cards { display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); }
+
+.glow { box-shadow: 0 8px 30px rgba(139,92,246,0.25); }
+
+.hidden { display: none; }
+
+.h1 { @apply text-4xl md:text-6xl font-extrabold text-center; }
+.h2 { @apply text-2xl md:text-3xl text-center; }
+
+/* ---------------- Floating Background Bubbles ---------------- */
+.floating-bubble {
+  position: absolute;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  opacity: 0.4;
+  animation: floatUp 14s linear infinite;
+}
+
+.floating-bubble:nth-child(1) { left: 10%; animation-delay: 0s; background: #f9a8d4; }
+.floating-bubble:nth-child(2) { left: 40%; animation-delay: 4s; background: #c4b5fd; }
+.floating-bubble:nth-child(3) { left: 70%; animation-delay: 8s; background: #bae6fd; }
+.floating-bubble:nth-child(4) { left: 85%; animation-delay: 10s; background: #fbcfe8; }
+
+@keyframes floatUp {
+  0% { transform: translateY(100vh); opacity: 0; }
+  20% { opacity: 0.7; }
+  100% { transform: translateY(-10vh); opacity: 0; }
+}
+
+/* ---------------- Fancy Text and Buttons ---------------- */
+.glow-title {
+  background: linear-gradient(to right, #b06ab3, #4568dc);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 0 20px rgba(173, 107, 255, 0.25);
+}
+
+.button-glow {
+  transition: all 0.3s ease;
+}
+
+.button-glow:hover {
+  box-shadow: 0 0 25px rgba(139,92,246,0.3), 0 0 10px rgba(236,72,153,0.2);
+  transform: scale(1.05);
+}
+/* 🌈 Floating animation for title */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+.glow-title {
+  background: linear-gradient(90deg, #a855f7, #ec4899, #8b5cf6);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  animation: float 3s ease-in-out infinite;
+  text-shadow: 0 6px 25px rgba(139, 92, 246, 0.4);
+}
+
+/* Extra spacing so shadow isn't cut */
+.section {
+  padding-top: 8rem;
+  padding-bottom: 8rem;
+}
+
+/* ---------------- End of CSS ---------------- */
